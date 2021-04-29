@@ -1,10 +1,13 @@
 import { 
+  IonButton,
   IonContent, 
   IonHeader, 
   IonPage, 
   IonTitle, 
-  IonToolbar } from '@ionic/react';
+  IonToolbar 
+} from '@ionic/react';
 import React from 'react';
+import { auth as firebaseAuth } from '../utils/firebase';
 
 const HomePage: React.FC = () => {
   return (
@@ -14,12 +17,11 @@ const HomePage: React.FC = () => {
           <IonTitle>Home</IonTitle>
         </IonToolbar>
       </IonHeader>
-      <IonContent fullscreen>
-        <IonHeader collapse="condense">
-          <IonToolbar>
-            <IonTitle size="large">Blank</IonTitle>
-          </IonToolbar>
-        </IonHeader>
+      <IonContent fullscreen  className="ion-padding">
+        <IonButton color="medium" expand="block"
+          onClick={() => firebaseAuth.signOut()}>
+          Logout
+        </IonButton>
       </IonContent>
     </IonPage>
   );
