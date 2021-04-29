@@ -1,0 +1,17 @@
+{
+	"folders": [
+		{
+			"path": "osbrain"
+		},
+		{
+			"path": "nlp"
+		},
+		{
+			"path": "flask"
+		},
+		{
+			"path": "ionic"
+		}
+	],
+	"settings": {}
+}

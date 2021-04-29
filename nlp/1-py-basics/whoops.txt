@@ -1,0 +1,2 @@
+This a new first line because we lost the original ones after opening in w+ mode!
+This is a line being appended in a+ mode
