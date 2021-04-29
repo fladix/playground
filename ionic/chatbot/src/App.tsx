@@ -1,15 +1,19 @@
 import React from 'react';
-import { Redirect, Route } from 'react-router-dom';
+import { Redirect, Route, Switch } from 'react-router-dom';
 import { IonApp, IonRouterOutlet } from '@ionic/react';
 import { IonReactRouter } from '@ionic/react-router';
-import HomePage from './pages/HomePage';
+import LoginPage from './pages/LoginPage';
+import AppAuthRoutes from './components/AppAuthRoutes';
 
 const App: React.FC = () => (
   <IonApp>
     <IonReactRouter>
       <IonRouterOutlet>
-        <Route path="/home" component={HomePage} exact={true} />
-        <Route exact path="/" render={() => <Redirect to="/home" />} />
+        <Switch>
+          <Route path="/login" component={LoginPage} exact={true} />
+          <Route path="/my" component={AppAuthRoutes} />
+          <Route exact path="/" render={() => <Redirect to="/my/home" />} />
+        </Switch>
       </IonRouterOutlet>
     </IonReactRouter>
   </IonApp>
