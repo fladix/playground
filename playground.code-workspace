@@ -1,9 +1,6 @@
 {
 	"folders": [
 		{
-			"path": "osbrain"
-		},
-		{
 			"path": "nlp"
 		},
 		{
@@ -11,6 +8,12 @@
 		},
 		{
 			"path": "ionic"
+		},
+		{
+			"path": "cloudrun"
+		},
+		{
+			"path": "osbrain"
 		}
 	],
 	"settings": {}

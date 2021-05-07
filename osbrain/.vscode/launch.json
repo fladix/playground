@@ -1,6 +1,14 @@
 {
     "configurations": [
         {
+            "name": "Python: Current File",
+            "type": "python",
+            "request": "launch",
+            "program": "${file}",
+            "console": "integratedTerminal",
+            "justMyCode": false
+        },
+        {
             "name": "Cloud Run: Run/Debug Locally",
             "type": "cloudcode.cloudrun",
             "request": "launch",
