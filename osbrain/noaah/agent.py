@@ -1,25 +1,33 @@
 """
 Agent logic
 """
-# TODO This a bad implemented module; will be refactored into a class later
-from noaah.world import db
-from noaah.world import live_agents
-from noaah.world import get_agent_proxy as __get_ag_px
+from noaah.world import World
 
 
-def _agent_doc(agent_id):
-    return db['fire'].collection('agents').document(agent_id).get().to_dict()
+class AgentUtils():
 
-def get_agent_proxy(ns_name, agent_id):
-    return __get_ag_px(ns_name, agent_id)
+    """
+    Class public interface
+    """
+    def get_agent_proxy(self, ns_name):
+        return World.get_agent_proxy(ns_name, self.agent_id)
 
-def get_nick(agent_id):
-    dic = _agent_doc(agent_id)
-    return dic['nick']
+    def check_alive(self):
+        return self.agent_id in World.get_live_agents()
 
-def get_ns_name(agent_id):
-    dic = _agent_doc(agent_id)
-    return dic['ns_name']
+    def get_nick(self):
+        dic = self._agent_doc()
+        return dic['nick']
 
-def check_alive(agent_id):
-    return agent_id in live_agents
+    def get_ns_name(self):
+        dic = self._agent_doc()
+        return dic['ns_name']
+
+    """
+    Class private interface
+    """
+    def __init__(self, agent_id):
+        self.agent_id = agent_id
+        
+    def _agent_doc(self):
+        return World.get_client_db().collection('agents').document(self.agent_id).get().to_dict()
