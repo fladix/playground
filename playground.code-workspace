@@ -16,5 +16,7 @@
 			"path": "osbrain"
 		}
 	],
-	"settings": {}
+	"settings": {
+		"todo-tree.tree.showBadges": true
+	}
 }
