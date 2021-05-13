@@ -80,5 +80,4 @@ if __name__ == '__main__':
 
     # API spin-up
     server_port = os.environ.get('PORT', '8080')
-    # TODO @fladix When debug=True, the World Singleton instantiates two times
     app.run(debug=True, port=server_port, host='0.0.0.0')
