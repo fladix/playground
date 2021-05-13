@@ -20,18 +20,21 @@ api = Api(app)
 class WorldRes(Resource):
     
     def get(self):
-        msg = f'Welcome to {World.get_name()}! Please look at the [Cloud Run/Debug Locally - Detailed] window'
-        return {'msg': msg}, 200
+        name = 'Emptiness' if not World.get_name() else World.get_name()
+        msg = f'Welcome to {name}! Please look at the [Cloud Run/Debug Locally - Detailed] window'
+        return {'msg': msg}, 200 if World.get_name() else 404
     
     def put(self):
+        http_code = 201 if not World.get_live_ns() else 200
         data = request.get_json()
         World(data['name'])
         msg = f'Welcome to {data["name"]}!'
-        return {'msg': msg}, 200
+        return {'msg': msg}, http_code
 
     def delete(self):
-        World.destroy_world()    
-        return {'msg': f'{World.get_name()} was destroyed!'}, 200
+        name = World.get_name()
+        World.destroy_world()   
+        return {'msg': f'{name} was destroyed!'}, 200
 
 
 class PushPullRes(Resource):
@@ -76,6 +79,5 @@ api.add_resource(AgentRes, '/osbrain/agent/<string:agent_id>')
 if __name__ == '__main__':
 
     # API spin-up
-    World('Westeros')
     server_port = os.environ.get('PORT', '8080')
-    app.run(debug=False, port=server_port, host='0.0.0.0')
+    app.run(debug=True, port=server_port, host='0.0.0.0')
