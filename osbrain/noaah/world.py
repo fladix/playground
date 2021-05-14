@@ -1,7 +1,7 @@
 """
 World creation and management routines
 """
-from firebase_admin import credentials, firestore, initialize_app
+from firebase_admin import credentials, firestore, initialize_app as fb_initialize_app, delete_app as fb_delete_app
 from osbrain import run_agent
 from osbrain import run_nameserver
 from osbrain.address import SocketAddress
@@ -19,7 +19,8 @@ class World(object):
 
     @classmethod
     def set_db_client(cls):
-        initialize_app(credentials.Certificate(cls.__key))
+        # Attention: working dir must be correct since we are using relative path for key.json
+        cls.__fb_app = fb_initialize_app(credentials.Certificate(cls.__key))
         cls.__db = firestore.client()
 
     @classmethod
@@ -46,11 +47,18 @@ class World(object):
     def destroy_world(cls):
         for ns in cls.__live_ns:
             NSProxy(nsaddr=cls.__get_address(ns)).shutdown()
+        cls.__instance = None
+        cls.__live_agents = []
+        cls.__live_ns = []
+        fb_delete_app(cls.__fb_app)
+        cls.__db = {}
+        cls.__name = ''
 
     # ----------------------
     # Class private interface
     # ----------------------
     __name = ''
+    __fb_app = {}
     __db = {}
     __key = 'noaah/key.json'
     __live_ns = []

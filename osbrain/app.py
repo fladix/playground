@@ -20,9 +20,8 @@ api = Api(app)
 class WorldRes(Resource):
     
     def get(self):
-        name = 'Emptiness' if not World.get_name() else World.get_name()
-        msg = f'Welcome to {name}! Please look at the [Cloud Run/Debug Locally - Detailed] window'
-        return {'msg': msg}, 200 if World.get_name() else 404
+        if not World.get_name(): return {'msg': 'Welcome to Emptiness'}, 404
+        return {'msg': f'Welcome to {World.get_name()}!'}, 200
     
     def put(self):
         http_code = 201 if not World.get_live_ns() else 200
@@ -33,7 +32,8 @@ class WorldRes(Resource):
 
     def delete(self):
         name = World.get_name()
-        World.destroy_world()   
+        if not name: return {'msg': 'Nothing to destroy here'}, 404  
+        World.destroy_world() 
         return {'msg': f'{name} was destroyed!'}, 200
 
 
@@ -46,7 +46,7 @@ class PushPullRes(Resource):
         if agent.check_alive():
             for i in range(3):
                 agent.get_agent_proxy(ns_name).send('main', f'Hello there! This is {nick}! Message #{i}')
-                time.sleep(3)
+                time.sleep(0.5)
             msg = f'{nick} says:- Please look for messages in the console'
         else:
             msg = f'{nick} says:- Looks like I am dead'
