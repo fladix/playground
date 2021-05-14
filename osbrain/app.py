@@ -24,7 +24,7 @@ class WorldRes(Resource):
         return {'msg': f'Welcome to {World.get_name()}!'}, 200
     
     def put(self):
-        http_code = 201 if not World.get_live_ns() else 200
+        http_code = 201 if not World.get_name() else 200
         data = request.get_json()
         World(data['name'])
         msg = f'Welcome to {data["name"]}!'
