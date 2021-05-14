@@ -40,6 +40,7 @@ class WorldRes(Resource):
 class PushPullRes(Resource):
     
     def get(self):
+        if not World.get_name(): return {'msg': 'Cannot communicate in vacuum'}, 404
         agent = AgentUtils('6uv5UhwyXmnStkYRYFdq')
         nick = agent.get_nick()
         ns_name = agent.get_ns_name()
