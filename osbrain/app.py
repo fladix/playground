@@ -1,8 +1,9 @@
 import os
 import time
 
-from flask import Flask, request
-from flask_restful import Resource, Api
+from flask import Flask
+from flask import jsonify, request
+from flask.views import MethodView
 
 from noaah.world import World
 from noaah.agent import AgentUtils
@@ -15,32 +16,33 @@ Attention:
 
 # pylint: disable=C0103
 app = Flask(__name__)
-api = Api(app)
 
-class WorldRes(Resource):
+class WorldRes(MethodView):
     
     def get(self):
         if not World.get_name(): return {'msg': 'Welcome to Emptiness'}, 404
-        return {'msg': f'Welcome to {World.get_name()}!'}, 200
+        msg = f'Welcome to {World.get_name()}!'
+        return jsonify({'msg': msg}), 200
     
     def put(self):
         http_code = 201 if not World.get_name() else 200
         data = request.get_json()
         World(data['name'])
         msg = f'Welcome to {data["name"]}!'
-        return {'msg': msg}, http_code
+        return jsonify({'msg': msg}), http_code
 
     def delete(self):
         name = World.get_name()
         if not name: return {'msg': 'Nothing to destroy here'}, 404  
-        World.destroy_world() 
-        return {'msg': f'{name} was destroyed!'}, 200
+        World.destroy_world()
+        msg = f'{name} was destroyed!'
+        return jsonify({'msg': msg}), 200
 
 
-class PushPullRes(Resource):
+class PushPullRes(MethodView):
     
     def get(self):
-        if not World.get_name(): return {'msg': 'Cannot communicate in vacuum'}, 404
+        if not World.get_name(): return jsonify({'msg': 'Cannot communicate in vacuum'}), 404
         agent = AgentUtils('6uv5UhwyXmnStkYRYFdq')
         nick = agent.get_nick()
         ns_name = agent.get_ns_name()
@@ -51,10 +53,10 @@ class PushPullRes(Resource):
             msg = f'{nick} says:- Please look for messages in the console'
         else:
             msg = f'{nick} says:- Looks like I am dead'
-        return {"msg": msg}, 200
+        return jsonify({"msg": msg}), 200
 
 
-class AgentRes(Resource):
+class AgentRes(MethodView):
 
     # TODO Get agent data
     def get(self):
@@ -72,9 +74,9 @@ class AgentRes(Resource):
     def delete():
         pass
 
-api.add_resource(WorldRes, '/osbrain/world')
-api.add_resource(PushPullRes, '/osbrain/pushpull')
-api.add_resource(AgentRes, '/osbrain/agent/<string:agent_id>')
+app.add_url_rule('/osbrain/world', view_func=WorldRes.as_view('world_res'))
+app.add_url_rule('/osbrain/pushpull', view_func=PushPullRes.as_view('pushpull_res'))
+app.add_url_rule('/osbrain/agent/<string:agent_id>', view_func=AgentRes.as_view('agent_res'))
 
 
 if __name__ == '__main__':
