@@ -6,9 +6,9 @@ from noaah.world import World
 
 class AgentUtils():
 
-    """
-    Class public interface
-    """
+    # ----------------------
+    # Class public interface
+    # ----------------------
     def get_agent_proxy(self, ns_name):
         return World.get_agent_proxy(ns_name, self.agent_id)
 
@@ -23,11 +23,15 @@ class AgentUtils():
         dic = self._agent_doc()
         return dic['ns_name']
 
-    """
-    Class private interface
-    """
+    # -----------------------
+    # Class private interface
+    # -----------------------
     def __init__(self, agent_id):
         self.agent_id = agent_id
         
     def _agent_doc(self):
         return World.get_client_db().collection('agents').document(self.agent_id).get().to_dict()
+
+
+if __name__ == "__main__":
+    pass
