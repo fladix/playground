@@ -14,9 +14,9 @@ Attention:
 app = Flask(__name__)
 
 app.add_url_rule('/osbrain/world', view_func=WorldRes.as_view('world_res'))
-app.add_url_rule('/osbrain/cases/pushpull', view_func=PushPullRes.as_view('pushpull_res'))
-app.add_url_rule('/osbrain/agent/<string:agent_id>', view_func=AgentRes.as_view('agent_res'))
-
+app.add_url_rule('/osbrain/cases/pushpull/<string:agent_id>', view_func=PushPullRes.as_view('pushpull_res'))
+app.add_url_rule('/osbrain/agent', view_func=AgentRes.as_view('agent_res_c'), methods=['POST',])
+app.add_url_rule('/osbrain/agent/<string:agent_id>', view_func=AgentRes.as_view('agent_res_rud'), methods=['GET', 'PUT', 'DELETE'])
 
 if __name__ == '__main__':
 
