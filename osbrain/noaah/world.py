@@ -40,6 +40,13 @@ class World(object):
         return NSProxy(nsaddr=cls.__get_address(ns_name)).proxy(agent_id)
 
     @classmethod
+    def instatiate_agent(cls, doc_id, dic):
+        agent_proxy = run_agent(name=doc_id, nsaddr=cls.__get_address(dic['ns_name']))
+        cls.__setup_agent_comms(dic, agent_proxy)
+        cls.__live_agents.append(doc_id)
+        print(f'{dic["ns_name"]:<20}{dic["class"]:<30}{dic["nick"]:<50}{dic["comm"]["channels"][0]["pattern"]:<20}', sep='')
+
+    @classmethod
     def monitor(cls):
         pass
 
@@ -98,11 +105,7 @@ class World(object):
         print('\n', f'{"NS":<20}{"Class":<30}{"Nick":<50}{"Comms":<20}\n', '-' * 105, sep='')
         agents_ref = cls.__db.collection('agents')
         for doc in agents_ref.stream():
-            dic = doc.to_dict()
-            agent_proxy = run_agent(name=doc.id, nsaddr=cls.__get_address(dic['ns_name']))
-            cls.__setup_agent_comms(dic, agent_proxy)
-            cls.__live_agents.append(doc.id)
-            print(f'{dic["ns_name"]:<20}{dic["class"]:<30}{dic["nick"]:<50}{dic["comm"]["channels"][0]["pattern"]:<20}', sep='')
+            cls.instatiate_agent(doc.id, doc.to_dict())
 
     @classmethod
     def __setup_agent_comms(cls, agent_data, agent_proxy):
