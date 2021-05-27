@@ -4,16 +4,13 @@
 			"path": "nlp"
 		},
 		{
-			"path": "flask"
-		},
-		{
 			"path": "ionic"
 		},
 		{
-			"path": "cloudrun"
+			"path": "osbrain"
 		},
 		{
-			"path": "osbrain"
+			"path": "react"
 		}
 	],
 	"settings": {
