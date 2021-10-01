@@ -1,0 +1,35 @@
+@import "~antd/dist/antd.css";
+@import url("http://fonts.googleapis.com/css?family=Lato:400,700");
+
+.App {
+  text-align: center;
+}
+
+.App-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px;
+  height: 8vh;
+  background-color: #055197;
+}
+
+.App-sider {
+}
+
+.App-content {
+  display: flex;
+  height: 86vh;
+  align-items: center;
+  justify-content: center;
+  font-size: 3rem;
+}
+
+.App-footer {
+  background-color: rgb(175, 175, 175);
+  color: rgb(63, 63, 65);
+  height: 6vh;
+}
+
+.App-link {
+}
