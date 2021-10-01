@@ -1,6 +1,12 @@
 import "./App.css";
 import React from "react";
-import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Link,
+  Redirect,
+} from "react-router-dom";
 import { Layout, Menu, Avatar } from "antd";
 import Title from "antd/lib/typography/Title";
 import Home from "./pages/Home";
@@ -75,6 +81,9 @@ function App() {
             <Layout>
               <Content className="App-content">
                 <Switch>
+                  <Route path="/" exact>
+                    <Redirect to="/home" />
+                  </Route>
                   <Route path="/home" exact component={Home}></Route>
                   <Route
                     path="/provider/organization"
