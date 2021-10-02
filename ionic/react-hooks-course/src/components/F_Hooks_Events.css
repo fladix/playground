@@ -1,0 +1,18 @@
+.item-style {
+  border: 1px gray solid;
+  width: 200px;
+}
+
+.item-kcals {
+  font-size: 20px;
+  color: yellow;
+}
+
+.button-remove {
+  font-size: 18px;
+  background-color: hotpink;
+  width: 90%;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  margin-bottom: 10px;
+}
