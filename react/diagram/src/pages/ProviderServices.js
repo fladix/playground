@@ -1,4 +1,4 @@
-import React, { useState, useCallback, useRef } from "react";
+import React, { useState, useCallback } from "react";
 import ReactFlow from "react-flow-renderer";
 import { Dropdown, Menu, Button, Space } from "antd";
 
@@ -26,7 +26,6 @@ function ProviderServices() {
   const [elements, setElements] = useState(initialElements);
   const [posInput, setPosInput] = useState({ x: 200, y: posIni.y - 150 });
   const [posOutput, setPosOutput] = useState({ x: 1200, y: posIni.y - 150 });
-  const diagRef = useRef(null);
 
   const handleMenuClick = (e) => {
     let pos, newNode, newEdge;
@@ -106,7 +105,7 @@ function ProviderServices() {
           </Dropdown>
         </Space>
       </div>
-      <div ref={diagRef} className="ProvSvc-diagram">
+      <div className="ProvSvc-diagram">
         <ReactFlow elements={elements} />
       </div>
     </div>
