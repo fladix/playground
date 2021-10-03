@@ -1,54 +1,80 @@
-import React, { useState, useCallback } from "react";
+import React, { useState, useCallback, useRef } from "react";
 import ReactFlow from "react-flow-renderer";
 import { Dropdown, Menu, Button, Space } from "antd";
 
-const initialElements = [
-  {
-    id: "1",
-    sourcePosition: "right",
-    targetPosition: "left",
-    // you can also pass a React component as a label
-    data: { label: <div>My Service</div> },
-    position: { x: 100, y: 125 },
+const posIni = {
+  x: 750,
+  y: 100,
+};
+
+const serviceNode = {
+  id: "service",
+  sourcePosition: "right",
+  targetPosition: "left",
+  // you can also pass a React component as a label
+  data: {
+    label: <div style={{ height: "400px" }}>My Service</div>,
   },
-];
+  position: { x: posIni.x, y: posIni.y },
+};
+
+const initialElements = [serviceNode];
 
 const getNodeId = () => `randomnode_${+new Date()}`;
 
 function ProviderServices() {
   const [elements, setElements] = useState(initialElements);
+  const [posInput, setPosInput] = useState({ x: 200, y: posIni.y - 150 });
+  const [posOutput, setPosOutput] = useState({ x: 1200, y: posIni.y - 150 });
+  const diagRef = useRef(null);
 
   const handleMenuClick = (e) => {
+    let pos, newNode, newEdge;
     switch (e.key) {
       case "in-date-time":
       case "in-location":
       case "in-size":
-        onAdd({
+        pos = { x: posInput.x, y: posInput.y + 100 };
+        newNode = {
           id: getNodeId(),
           type: "input",
           sourcePosition: "right",
           data: { label: e.key },
-          position: { x: 50, y: 50 },
-        });
+          position: pos,
+        };
+        newEdge = {
+          id: getNodeId(),
+          source: newNode.id,
+          target: "service",
+        };
+        setPosInput(pos);
         break;
       case "out-price":
       case "out-prospect":
-        onAdd({
+        pos = { x: posOutput.x, y: posOutput.y + 100 };
+        newNode = {
           id: getNodeId(),
           type: "output",
           targetPosition: "left",
           data: { label: e.key },
-          position: { x: 50, y: 50 },
-        });
+          position: pos,
+        };
+        newEdge = {
+          id: getNodeId(),
+          source: "service",
+          target: newNode.id,
+        };
+        setPosOutput(pos);
         break;
       default:
         alert("Not expected: default case");
     }
+    onAdd(newNode, newEdge);
   };
 
   const onAdd = useCallback(
-    (newNode) => {
-      setElements((els) => els.concat(newNode));
+    (newNode, newEdge) => {
+      setElements((els) => els.concat(newNode, newEdge));
     },
     [setElements]
   );
@@ -80,7 +106,7 @@ function ProviderServices() {
           </Dropdown>
         </Space>
       </div>
-      <div className="ProvSvc-diagram">
+      <div ref={diagRef} className="ProvSvc-diagram">
         <ReactFlow elements={elements} />
       </div>
     </div>
