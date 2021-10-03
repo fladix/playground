@@ -21,22 +21,37 @@ function ProviderServices() {
   const handleMenuClick = (e) => {
     switch (e.key) {
       case "in-date-time":
-        console.log("in-date-time");
-        onAdd();
-        break;
       case "in-location":
-        console.log("in-location");
-        break;
       case "in-size":
-        console.log("in-size");
+        onAdd({
+          id: getNodeId(),
+          type: "input",
+          sourcePosition: "right",
+          data: { label: e.key },
+          position: { x: 50, y: 50 },
+        });
         break;
       case "out-price":
-        console.log("out-price");
-        break;
       case "out-prospect":
-        console.log("out-prospect");
+        onAdd({
+          id: getNodeId(),
+          type: "output",
+          targetPosition: "left",
+          data: { label: e.key },
+          position: { x: 50, y: 50 },
+        });
+        break;
+      default:
+        alert("Not expected: default case");
     }
   };
+
+  const onAdd = useCallback(
+    (newNode) => {
+      setElements((els) => els.concat(newNode));
+    },
+    [setElements]
+  );
 
   const menuInput = (
     <Menu onClick={handleMenuClick}>
@@ -52,18 +67,6 @@ function ProviderServices() {
       <Menu.Item key="out-prospect">Prospect</Menu.Item>
     </Menu>
   );
-
-  // TODO Add param to memoization: required special trick
-  const onAdd = useCallback(() => {
-    const newNode = {
-      id: getNodeId(),
-      type: "input",
-      sourcePosition: "right",
-      data: { label: "Input #1" },
-      position: { x: 50, y: 50 },
-    };
-    setElements((els) => els.concat(newNode));
-  }, [setElements]);
 
   return (
     <div className="ProvSvc-grid">
