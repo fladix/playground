@@ -1,44 +1,10 @@
 import React, { useState, useCallback } from "react";
-import ReactFlow, { isNode } from "react-flow-renderer";
+import ReactFlow from "react-flow-renderer";
 import { Dropdown, Menu, Button, Space } from "antd";
-import dagre from "dagre";
 
-const dagreGraph = new dagre.graphlib.Graph();
-dagreGraph.setDefaultEdgeLabel(() => ({}));
-
-const nodeWidth = 172;
-const nodeHeight = 36;
-
-const getLayoutedElements = (elements) => {
-  dagreGraph.setGraph({ rankdir: "LR" });
-  elements.forEach((el) => {
-    if (isNode(el)) {
-      dagreGraph.setNode(el.id, { width: nodeWidth, height: nodeHeight });
-    } else {
-      dagreGraph.setEdge(el.source, el.target);
-    }
-  });
-
-  dagre.layout(dagreGraph);
-
-  return elements.map((el) => {
-    if (isNode(el)) {
-      const nodeWithPosition = dagreGraph.node(el.id);
-      el.targetPosition = "left";
-      el.sourcePosition = "right";
-
-      // Little hack to pass a slightly different position to notify react flow
-      // about the change. Moreover, this shifts the dagre node position
-      // (anchor=center center) to the top left so it matches the
-      // react flow node anchor point (top left).
-      el.position = {
-        x: nodeWithPosition.x - nodeWidth / 2 + Math.random() / 1000,
-        y: nodeWithPosition.y - nodeHeight / 2,
-      };
-    }
-
-    return el;
-  });
+const posIni = {
+  x: 750,
+  y: 100,
 };
 
 const serviceNode = {
@@ -46,8 +12,10 @@ const serviceNode = {
   sourcePosition: "right",
   targetPosition: "left",
   // you can also pass a React component as a label
-  data: { label: <div>My Service</div> },
-  position: { x: 550, y: 200 },
+  data: {
+    label: <div style={{ height: "400px" }}>My Service</div>,
+  },
+  position: { x: posIni.x, y: posIni.y },
 };
 
 const initialElements = [serviceNode];
@@ -56,58 +24,59 @@ const getNodeId = () => `randomnode_${+new Date()}`;
 
 function ProviderServices() {
   const [elements, setElements] = useState(initialElements);
-
-  const onLayout = useCallback(
-    (newNode, newEdge) => {
-      const layoutedElements = getLayoutedElements(
-        elements.concat(newNode, newEdge)
-      );
-      setElements(layoutedElements);
-    },
-    [elements]
-  );
+  const [posInput, setPosInput] = useState({ x: 200, y: posIni.y - 150 });
+  const [posOutput, setPosOutput] = useState({ x: 1200, y: posIni.y - 150 });
 
   const handleMenuClick = (e) => {
-    let newNode, newEdge;
+    let pos, newNode, newEdge;
     switch (e.key) {
       case "in-date-time":
       case "in-location":
       case "in-size":
+        pos = { x: posInput.x, y: posInput.y + 100 };
         newNode = {
           id: getNodeId(),
           type: "input",
           sourcePosition: "right",
           data: { label: e.key },
-          position: { x: 0, y: 0 },
+          position: pos,
         };
         newEdge = {
           id: getNodeId(),
           source: newNode.id,
           target: "service",
         };
+        setPosInput(pos);
         break;
       case "out-price":
       case "out-prospect":
+        pos = { x: posOutput.x, y: posOutput.y + 100 };
         newNode = {
           id: getNodeId(),
           type: "output",
           targetPosition: "left",
           data: { label: e.key },
-          position: { x: 0, y: 0 },
+          position: pos,
         };
         newEdge = {
           id: getNodeId(),
           source: "service",
           target: newNode.id,
         };
+        setPosOutput(pos);
         break;
       default:
         alert("Not expected: default case");
     }
-    // onAdd eliminated: would required two setElements and react performs
-    // state updades in batch and asynchronously. So it wouldn't work.
-    onLayout(newEdge, newNode);
+    onAdd(newNode, newEdge);
   };
+
+  const onAdd = useCallback(
+    (newNode, newEdge) => {
+      setElements((els) => els.concat(newNode, newEdge));
+    },
+    [setElements]
+  );
 
   const menuInput = (
     <Menu onClick={handleMenuClick}>
