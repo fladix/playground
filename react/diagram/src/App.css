@@ -1,5 +1,6 @@
 @import "~antd/dist/antd.css";
 @import url("http://fonts.googleapis.com/css?family=Lato:400,700");
+@import url("https://fonts.googleapis.com/css2?family=Gemunu+Libre:wght@800");
 
 * {
   font-family: "Lato", sans-serif;
@@ -16,6 +17,13 @@
   padding: 20px;
   height: 8vh;
   background-color: #055197;
+}
+
+.App-header-brand {
+  color: white;
+  font-family: "Gemunu Libre", sans-serif;
+  font-size: 40px;
+  margin: 0;
 }
 
 .App-sider {

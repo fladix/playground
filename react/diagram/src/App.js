@@ -30,9 +30,7 @@ function App() {
       <Router>
         <Layout>
           <Header className="App-header">
-            <Title style={{ color: "white" }} level={3}>
-              noaah
-            </Title>
+            <h3 className="App-header-brand">noaah</h3>
             <Avatar size="large" icon={<AiIcons.AiOutlineUser />} />
           </Header>
           <Layout>
