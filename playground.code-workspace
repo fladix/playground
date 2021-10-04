@@ -1,19 +1,22 @@
 {
-	"folders": [
-		{
-			"path": "nlp"
-		},
-		{
-			"path": "ionic"
-		},
-		{
-			"path": "osbrain"
-		},
-		{
-			"path": "react"
-		}
-	],
-	"settings": {
-		"todo-tree.tree.showBadges": true
-	}
+  "folders": [
+    {
+      "path": "nlp"
+    },
+    {
+      "path": "ionic"
+    },
+    {
+      "path": "osbrain"
+    },
+    {
+      "path": "react"
+    },
+    {
+      "path": "web"
+    }
+  ],
+  "settings": {
+    "todo-tree.tree.showBadges": true
+  }
 }
