@@ -3,14 +3,22 @@ main {
   margin: auto;
 }
 
+.background {
+  background: url(../images/plans-background.jpg);
+  width: 100%;
+  height: 100%;
+  position: fixed;
+}
+
 .plan {
+  padding: 20px;
+  margin: 20px 0;
+  width: 60%;
   background: rgba(215, 255, 215, 0.95);
   border: 3px solid #0e4f1f;
   border-left: none;
   border-radius: 0 20px 20px 0;
-  width: 60%;
-  padding: 20px;
-  margin: 20px 0;
+  position: relative;
 }
 
 .plan:hover,
@@ -62,4 +70,15 @@ main {
 
 .plan-premium .plan__description {
   border-color: #d7ffd7;
+}
+
+.plan__badge {
+  position: absolute;
+  top: 0;
+  right: 0;
+  margin: 20px;
+  padding: 8px;
+  background: #ff7676;
+  color: white;
+  font-size: 14px;
 }
