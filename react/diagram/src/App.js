@@ -8,7 +8,6 @@ import {
   Redirect,
 } from "react-router-dom";
 import { Layout, Menu, Avatar } from "antd";
-import Title from "antd/lib/typography/Title";
 import Home from "./pages/Home";
 import ProviderOrganization from "./pages/ProviderOrganization";
 import ProviderServices from "./pages/ProviderServices";
@@ -20,6 +19,7 @@ import * as AiIcons from "react-icons/ai";
 import * as FaIcons from "react-icons/fa";
 import * as IoIcons from "react-icons/io";
 import * as RiIcons from "react-icons/ri";
+import Logo from "./components/Logo";
 
 const { Header, Content, Footer, Sider } = Layout;
 const { SubMenu } = Menu;
@@ -30,7 +30,7 @@ function App() {
       <Router>
         <Layout>
           <Header className="App-header">
-            <h3 className="App-header-brand">noaah</h3>
+            <Logo />
             <Avatar size="large" icon={<AiIcons.AiOutlineUser />} />
           </Header>
           <Layout>
