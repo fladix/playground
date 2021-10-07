@@ -1,6 +1,7 @@
 import React, { useState, useCallback } from "react";
-import ReactFlow from "react-flow-renderer";
+import ReactFlow, { Controls } from "react-flow-renderer";
 import { Dropdown, Menu, Button, Space } from "antd";
+import * as IoIcons from "react-icons/io5";
 
 const posIni = {
   x: 750,
@@ -95,18 +96,30 @@ function ProviderServices() {
 
   return (
     <div className="ProvSvc-grid">
-      <div className="ProvSvc-toolbar">
-        <Space>
-          <Dropdown overlay={menuInput} placement="bottomLeft">
-            <Button size="large">Add Input Node</Button>
-          </Dropdown>
-          <Dropdown overlay={menuOutput} placement="bottomLeft">
-            <Button size="large">Add Output Node</Button>
-          </Dropdown>
-        </Space>
-      </div>
+      <Space className="ProvSvc-toolbar">
+        <Dropdown overlay={menuInput} placement="bottomLeft">
+          <Button
+            className="ProvSvc-tb-button"
+            size="large"
+            icon={<IoIcons.IoEnterOutline className="Button-icon" size={16} />}
+          >
+            In
+          </Button>
+        </Dropdown>
+        <Dropdown overlay={menuOutput} placement="bottomLeft">
+          <Button
+            className="ProvSvc-tb-button"
+            size="large"
+            icon={<IoIcons.IoExitOutline className="Button-icon" size={16} />}
+          >
+            Out
+          </Button>
+        </Dropdown>
+      </Space>
       <div className="ProvSvc-diagram">
-        <ReactFlow elements={elements} />
+        <ReactFlow elements={elements}>
+          <Controls />
+        </ReactFlow>
       </div>
     </div>
   );

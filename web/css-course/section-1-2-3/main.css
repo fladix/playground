@@ -1,0 +1,99 @@
+/* universal selector */
+* {
+  /* change default h/w calc to include padding & border */
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Montserrat", sans-serif;
+  margin: 0; /* Default body set by browser is 8px */
+}
+
+.main-header {
+  background: #2ddf5c;
+  padding: 8px 16px;
+}
+
+.main-header > div {
+  display: inline-block;
+  /* both the div and nav must be vertical aligned */
+  vertical-align: middle;
+}
+
+.main-header__brand {
+  color: #0e4f1f;
+  text-decoration: none;
+  font-weight: bold;
+  font-size: 22px;
+}
+
+.main-nav {
+  display: inline-block;
+  /* both the nav and div must be vertically aligned */
+  vertical-align: middle;
+  text-align: right;
+  width: calc(100% - 75px);
+}
+
+.main-nav__items {
+  margin: 0;
+  padding: 0;
+}
+
+.main-nav__item {
+  /* makes li elements inline instead of block, but with
+     using the mixed inline-block */
+  display: inline-block;
+  margin: 0 16px;
+}
+
+.main-nav__item a {
+  color: #0e4f1f;
+  text-decoration: none;
+  font-weight: bold;
+  padding: 3px 0;
+}
+
+/* hover and active is called a pseudo-class. operator: colon */
+.main-nav__item a:hover,
+.main-nav__item a:active {
+  color: white;
+  border-bottom: 3px solid white;
+}
+
+/* This rule must come after 'main-nav__item a' since
+   it has same specifity and our call to action button
+   will be under the action of both */
+.main-nav__item--cta a {
+  color: white;
+  background: #ff1b68;
+  padding: 8px 16px;
+  border-radius: 8px;
+}
+
+.main-nav__item--cta a:hover,
+.main-nav__item--cta a:active {
+  border: none;
+  color: #ff1b68;
+  background: white;
+}
+
+/* id selector */
+#product-overview {
+  background: url("freedom.jpg");
+  /* block level elements always expand to fill full width.
+     vertically, it only expands to fit content */
+  height: 500px;
+  padding: 10px;
+}
+
+/* combinato: h1's elements inside prod-overview */
+#product-overview h1 {
+  color: white;
+  font-family: "Anton", sans-serif;
+}
+
+/* class selector has higher specifity than element */
+.section-title {
+  color: #2ddf5c;
+}
