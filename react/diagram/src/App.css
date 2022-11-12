@@ -1,12 +1,9 @@
 @import "~antd/dist/antd.css";
 @import url("http://fonts.googleapis.com/css?family=Lato:400,700");
+@import url("https://fonts.googleapis.com/css2?family=Gemunu+Libre:wght@800");
 
 * {
   font-family: "Lato", sans-serif;
-}
-
-.App {
-  text-align: center;
 }
 
 .App-header {
@@ -16,9 +13,6 @@
   padding: 20px;
   height: 8vh;
   background-color: #055197;
-}
-
-.App-sider {
 }
 
 .App-content {
@@ -32,25 +26,27 @@
   height: 6vh;
 }
 
-.App-link {
-}
-
-.Pages-provider {
-}
-
 .ProvSvc-grid {
   display: grid;
-  grid-template-rows: 10% 90%;
+  grid-template-rows: 8% 92%;
   height: 86vh;
   padding: 0px;
 }
 
 .ProvSvc-toolbar {
-  padding: 20px;
+  background: #d4d4d4;
   border-bottom-style: solid;
   border-width: 1px;
-  border-color: rgb(201, 201, 201);
+  border-color: #afafaf;
+  justify-content: center;
 }
 
-.ProvSvc-diagram {
+.ProvSvc-tb-button {
+  padding: 0 15px;
+  border-color: black;
+}
+
+.Button-icon {
+  margin-right: 5px;
+  vertical-align: middle;
 }
