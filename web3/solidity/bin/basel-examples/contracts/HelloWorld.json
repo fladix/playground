@@ -1,0 +1,130 @@
+{
+    "contractName": "HelloWorld",
+    "abi": [
+        {
+            "inputs": [],
+            "name": "answer",
+            "outputs": [
+                {
+                    "internalType": "uint256",
+                    "name": "",
+                    "type": "uint256"
+                }
+            ],
+            "stateMutability": "view",
+            "type": "function"
+        }
+    ],
+    "metadata": "{\"compiler\":{\"version\":\"0.8.19+commit.7dd6d404\"},\"language\":\"Solidity\",\"output\":{\"abi\":[{\"inputs\":[],\"name\":\"answer\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"}],\"devdoc\":{\"kind\":\"dev\",\"methods\":{},\"version\":1},\"userdoc\":{\"kind\":\"user\",\"methods\":{},\"version\":1}},\"settings\":{\"compilationTarget\":{\"/home/iandix/Dev/playground/solidity/basel-examples/contracts/helloword.sol\":\"HelloWorld\"},\"evmVersion\":\"paris\",\"libraries\":{},\"metadata\":{\"bytecodeHash\":\"ipfs\"},\"optimizer\":{\"enabled\":true,\"runs\":200},\"remappings\":[]},\"sources\":{\"/home/iandix/Dev/playground/solidity/basel-examples/contracts/helloword.sol\":{\"keccak256\":\"0xad0770885b949d67e841eae33d58610d3ed6be232f876251bd575acf2ba303b8\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://4c7a9e929b2b0976523e6695a15542f011aaefb2edb202c586510e00a92b585b\",\"dweb:/ipfs/QmZ2Yjx2r6Ks698JJYLxPc14b59dWwmAFZ9JFoGuu6hNbz\"]}},\"version\":1}",
+    "bytecode": "6080604052602a600055348015601457600080fd5b50607d806100236000396000f3fe6080604052348015600f57600080fd5b506004361060285760003560e01c806385bb7d6914602d575b600080fd5b603560005481565b60405190815260200160405180910390f3fea2646970667358221220937c2a5dc69e2e66e5bd8ca72da2a07ca65c608f3af305c9dd705b9f9adfd63464736f6c63430008130033",
+    "deployedBytecode": "6080604052348015600f57600080fd5b506004361060285760003560e01c806385bb7d6914602d575b600080fd5b603560005481565b60405190815260200160405180910390f3fea2646970667358221220937c2a5dc69e2e66e5bd8ca72da2a07ca65c608f3af305c9dd705b9f9adfd63464736f6c63430008130033",
+    "sourceMap": "57:105:0:-:0;;;104:2;83:23;;57:105;;;;;;;;;;;;;;;;",
+    "deployedSourceMap": "57:105:0:-:0;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;83:23;;;;;;;;;160:25:1;;;148:2;133:18;83:23:0;;;;;;",
+    "sourcePath": "/home/iandix/Dev/playground/solidity/basel-examples/contracts/helloword.sol",
+    "compiler": {
+        "name": "solc",
+        "version": "0.8.19+commit.7dd6d404"
+    },
+    "ast": {
+        "absolutePath": "/home/iandix/Dev/playground/solidity/basel-examples/contracts/helloword.sol",
+        "exportedSymbols": {
+            "HelloWorld": [
+                5
+            ]
+        },
+        "id": 6,
+        "license": "MIT",
+        "nodeType": "SourceUnit",
+        "nodes": [
+            {
+                "id": 1,
+                "literals": [
+                    "solidity",
+                    "^",
+                    "0.8",
+                    ".9"
+                ],
+                "nodeType": "PragmaDirective",
+                "src": "32:23:0"
+            },
+            {
+                "abstract": false,
+                "baseContracts": [],
+                "canonicalName": "HelloWorld",
+                "contractDependencies": [],
+                "contractKind": "contract",
+                "fullyImplemented": true,
+                "id": 5,
+                "linearizedBaseContracts": [
+                    5
+                ],
+                "name": "HelloWorld",
+                "nameLocation": "66:10:0",
+                "nodeType": "ContractDefinition",
+                "nodes": [
+                    {
+                        "constant": false,
+                        "functionSelector": "85bb7d69",
+                        "id": 4,
+                        "mutability": "mutable",
+                        "name": "answer",
+                        "nameLocation": "95:6:0",
+                        "nodeType": "VariableDeclaration",
+                        "scope": 5,
+                        "src": "83:23:0",
+                        "stateVariable": true,
+                        "storageLocation": "default",
+                        "typeDescriptions": {
+                            "typeIdentifier": "t_uint256",
+                            "typeString": "uint256"
+                        },
+                        "typeName": {
+                            "id": 2,
+                            "name": "uint",
+                            "nodeType": "ElementaryTypeName",
+                            "src": "83:4:0",
+                            "typeDescriptions": {
+                                "typeIdentifier": "t_uint256",
+                                "typeString": "uint256"
+                            }
+                        },
+                        "value": {
+                            "hexValue": "3432",
+                            "id": 3,
+                            "isConstant": false,
+                            "isLValue": false,
+                            "isPure": true,
+                            "kind": "number",
+                            "lValueRequested": false,
+                            "nodeType": "Literal",
+                            "src": "104:2:0",
+                            "typeDescriptions": {
+                                "typeIdentifier": "t_rational_42_by_1",
+                                "typeString": "int_const 42"
+                            },
+                            "value": "42"
+                        },
+                        "visibility": "public"
+                    }
+                ],
+                "scope": 6,
+                "src": "57:105:0",
+                "usedErrors": []
+            }
+        ],
+        "src": "32:130:0"
+    },
+    "functionHashes": {
+        "answer()": "85bb7d69"
+    },
+    "gasEstimates": {
+        "creation": {
+            "codeDepositCost": "25000",
+            "executionCost": "22181",
+            "totalCost": "47181"
+        },
+        "external": {
+            "answer()": "2261"
+        }
+    }
+}

@@ -1,0 +1,53 @@
+1. Go to https://explorer.solana.com/ and select Devnet
+
+2. Search for the solana fs wallet address FAn7nLwyKakguMQGnsNjCCyrssZKA9hhuKihR281ArHQ 
+   and check the SOL balance (should be slightly lower than 1 SOL because we've spent
+   with gas fees to mint and transfer tokens in devnet) and transaction history
+   Balance (SOL)  ◎0.99090896
+
+3. Search for the solana phantom wallet address HcG8R8hYmnwhnPbvRwNn3jPUoXiyfahBxzGx8sfj2SPh 
+   and check the SOL balance (should be exactly 1 SOL, since we did an airdrop to devnet
+   of 1 SOL earlier using the faucet https://solfaucet.com/) and transaction history
+   Balance (SOL)  ◎1
+
+4. Search for the fungible token smart contract address CoM7cSQWFcpdLFrrDvxn5Jdg4wkfWSdoEqGw7Df3RsoU
+   and verify that: token is unknown, supply is 1 billion, etc
+
+5. Search for the non-fungible token (NFT) smart contract address 5vUAGL5SP3LVFpzWxVcmC5wjGbm4smDqFzY9DY6SRTHn
+   and verify that: token is unknown, supply is fixed equals 1, etc
+
+6. Search for the token account smart contract and check the balance, verifying: who minted, who is the
+   owner, and the token balance
+
+7. Now, let's give the token a name and an image. Go to GitHub (github.com/solana-labs/token-list).
+   Since Nov/2022, Solana has discontinued the Github repo and now the official primary means of adding metadata
+   to the token is using Metaplex
+
+8. The token metadata required by the Metaplex protocol will be stored in the permaweb (could be also stored 
+   on a regular centralized cloud server). We will use Arweave. First we create a wallet and ask for some
+   free tokens from their faucet (after exhausting, we need to buy them). 
+   Links: 
+   - Aerweave faucet: https://faucet.arweave.net/
+   - Aerweave app: arweave.app/wallet
+
+9. Now let's install the aerweave npm package and:
+   - Upload our image in the permaweb: npx ts-node ./arweaveUploadImage.ts  
+   - Upload our metaplex JSON file in the permaweb: npx ts-node ./arweaveUploadTokenJSON.ts
+
+10. Metaplex does not offer a cli for this, but rather a javascript lib. 
+   So, we will start by installing some node packages:
+   - npm install @metaplex-foundation/mpl-token-metadata --save
+   - npm install --save @solana/web3.js
+   - npm install @project-serum/anchor --save
+
+11. Copy the fs wallet key-pair created for our token intto the project directory 
+   renaming it to fs-sol-wallet-id.json
+
+12. Run the ts file to create the token metadata (check the INITIALIZE flag to see if it is first time or update): 
+   - npx ts-node ./metaplexCreateTokenMetadata.ts 
+
+13. Check at:
+   - SOL explorer the token meta: https://explorer.solana.com/ in Devnet address CoM7...
+   - Phantom wallet in Devnet
+   - Solscan in Devnet https://solscan.io/token/CoM7cSQWFcpdLFrrDvxn5Jdg4wkfWSdoEqGw7Df3RsoU?cluster=devnet
+
