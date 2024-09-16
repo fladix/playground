@@ -1,0 +1,6 @@
+#!/bin/bash
+
+# sui client publish --gas-budget 1500000
+export ADDRESS=0x9131ddf153485a64ac1da29fdb1f059cf228d1082bd96494ac50a973133ec55a
+export PACKAGE_TESTNET=0x94212dcdcabf6c0d93b9842857fba35d2190327a4a477cf5247d9805c3d40fda
+export PACKAGE_DEVNET=0x1c189462b4fb0a5ebe7368cfffba4246834d0d6dfa1094667c6affcebd66c24d

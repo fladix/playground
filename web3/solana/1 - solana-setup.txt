@@ -1,0 +1,15 @@
+1. Go to https://docs.solana.com/cli/install-solana-cli-tools
+
+2. Install the Solana Tool Suite
+   sh -c "$(curl -sSfL https://release.solana.com/v1.14.8/install)"
+
+3. Install Rust
+   curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
+
+4. Install dependencies  spl-token command-line utility
+   sudo apt install libudev-dev libssl-dev pkg-config -y 
+   sudo apt build-essential musl-tools -y
+   
+5. Install the spl-token command-line utility with cargo (TMPDIR required
+   to not bloat the root dir)
+   mkdir -p $HOME/tmp; TMPDIR=$HOME/tmp cargo install spl-token-cli
